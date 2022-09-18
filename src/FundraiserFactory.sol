@@ -11,10 +11,10 @@ contract FundraiserFactory {
     
     // todo: document
     function createFundraiser() public returns (uint256) {
-        Fundraiser fundraiser = new Fundraiser();
-        fundraisers.push(fundraiser); // todo: test
+        Fundraiser fundraiser = new Fundraiser(fundraiserIndex);
+        fundraisers.push(fundraiser); 
         ++fundraiserIndex;
         emit FundraiserCreated(address(fundraiser));
-        return fundraiserIndex - 1; // todo: test
+        return fundraiserIndex - 1; 
     }
 }

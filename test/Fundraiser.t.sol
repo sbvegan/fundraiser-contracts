@@ -36,4 +36,11 @@ contract FundraiserTest is Test, HelperContract {
         assertEq(fundraiserIndexBeforeCall, fundraiserIndexReturnValue);
         assertEq(fundraiserIndexReturnValue + 1, fundraiserIndexAfterCall);
     }
+
+    function testFundriaserIdMatchesFactoryIndex() public {
+        uint256 fundraiserIndex = fundraiserFactory.createFundraiser();
+        Fundraiser fundraiser = fundraiserFactory.fundraisers(fundraiserIndex);
+        uint256 fundraiserId = fundraiser.id();
+        assertEq(fundraiserIndex, fundraiserId);
+    }
 }
