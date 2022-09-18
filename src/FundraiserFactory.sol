@@ -6,18 +6,15 @@ import "./Fundraiser.sol";
 contract FundraiserFactory {
     event FundraiserCreated(address indexed fundraiserAddress);
 
-    mapping(address => Fundraiser[]) fundraisers;
+    uint256 public fundraiserIndex;
+    Fundraiser[] public fundraisers;
     
     // todo: document
-    function createFundraiser() public returns (address) {
+    function createFundraiser() public returns (uint256) {
         Fundraiser fundraiser = new Fundraiser();
-        fundraisers[msg.sender].push(fundraiser); // todo: test
+        fundraisers.push(fundraiser); // todo: test
+        ++fundraiserIndex;
         emit FundraiserCreated(address(fundraiser));
-        return address(fundraiser); // todo: test
-    }
-
-    // todo: document
-    function getFundraisersByAddress(address creator) public view returns (Fundraiser[] memory) {
-        return fundraisers[creator]; // todo: test
+        return fundraiserIndex - 1; // todo: test
     }
 }
